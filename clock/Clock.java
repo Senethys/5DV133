@@ -2,8 +2,8 @@ package clock;
 
 public class Clock {
 
-    private NumberDisplay minutes = new NumberDisplay(0, 60);
-    private NumberDisplay hours = new NumberDisplay(0, 24);
+    private NumberDisplay minutes = new NumberDisplay(0, 59);
+    private NumberDisplay hours = new NumberDisplay(0, 23);
     private String displayString;
 
     Clock() throws LimitException {
@@ -17,9 +17,12 @@ public class Clock {
     }
 
     public void timeTick() {
-        this.minutes.increment();
         if(minutes.didWrapAround()) {
             this.hours.increment();
+            this.minutes.increment();
+        } else {
+            minutes.increment();
+
         }
 
     }
@@ -38,9 +41,8 @@ public class Clock {
     }
 
 
-    private boolean updateDisplay() {
-        System.out.print(this.getTime());
-        return true;
+    private void updateDisplay() {
+        this.displayString = this.getTime();
     }
 
 
