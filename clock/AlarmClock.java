@@ -3,8 +3,7 @@ package clock;
 public class AlarmClock extends Clock {
 
     private String alarmTime;
-    private boolean status = false;
-    Clock clock = new Clock();
+    private boolean status = true;
 
     AlarmClock() throws LimitException { }
 
@@ -27,7 +26,7 @@ public class AlarmClock extends Clock {
     //Denna metod används för att avläsa om alarmet ringer (returnerar en bool).
     public boolean isTriggered() {
 
-        if(this.clock.getTime().equals(this.alarmTime)) {
+        if(this.getTime().equals(this.alarmTime) && this.status) {
             System.out.println("alarm");
             this.status = false;
             return true;
@@ -45,11 +44,6 @@ public class AlarmClock extends Clock {
     //Denna metod används för att stänga av ett larm.
     public void turnOff() {
         this.status = false;
-
-    }
-
-    public String getAlarmTime() {
-        return this.alarmTime;
 
     }
 }

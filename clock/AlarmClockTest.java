@@ -37,53 +37,32 @@ public class AlarmClockTest {
     public void setAlarmTimeTest() throws Exception {
         AlarmClock n = new AlarmClock();
         n.setAlarm(13,37);
-        assertEquals("23:59", n.getTime());
+        n.setTime(13,36);
+        assertFalse(n.isTriggered());
+        n.timeTick();
+        System.out.println(n.getTime());
+        assertTrue(n.isTriggered());
+        n.timeTick();
+        System.out.println(n.getTime());
+        assertFalse(n.isTriggered());
+
     }
 
-    @Test(expected = LimitException.class)
-    public void setTimeTestLimit() throws Exception {
-        Clock n = new Clock();
-        n.setTime(233, 529);
-    }
 
     @Test
-    public void setTimeTestIncrement() throws Exception {
-        Clock n = new Clock();
-        n.setTime(23,59);
+    public void alarmSwitchTest() throws Exception {
+        AlarmClock n = new AlarmClock();
+        n.setAlarm(13,37);
+        n.turnOff();
+        n.setTime(13,36);
+        assertFalse(n.isTriggered());
         n.timeTick();
-        assertEquals("00:00", n.getTime());
+        System.out.println(n.getTime());
+        assertFalse(n.isTriggered());
+
+        n.setAlarm(13,37);
+        n.setTime(13,36);
         n.timeTick();
-        assertEquals("00:01", n.getTime());
-        for (int i = 0; i < testIncrementTimes; i++) {
-            n.timeTick();
-        }
-        assertEquals("02:01", n.getTime());
-        for (int i = 0; i < testIncrementTimes * 4 + 23; i++) {
-            n.timeTick();
-        }
-        assertEquals("10:24", n.getTime());
-
-        n.setTime(13,42);
-        assertEquals("13:42", n.getTime());
-
+        assertTrue(n.isTriggered());
     }
-
-    @Test
-    public void TotalWrapAroundTest() throws Exception {
-        Clock n = new Clock();
-        n.setTime(13, 42);
-        assertEquals("13:42", n.getTime());
-        for (int i = 0; i < 1440; i++) {
-            n.timeTick();
-        }
-        assertEquals("13:42", n.getTime());
-        n.timeTick();
-
-        for (int i = 0; i < 617; i++) {
-            n.timeTick();
-        }
-        assertEquals("00:00", n.getTime());
-
-    }
-
 }

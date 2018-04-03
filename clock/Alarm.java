@@ -1,7 +1,7 @@
 package clock;
 
 /*
-* Objec oriented programming with Java
+* Object oriented programming with Java
 * Spring 18
 * Assignment 1
 * File:         Alarm.java (MWE)
@@ -19,7 +19,7 @@ package clock;
 
 public class Alarm {
 
-    public static void  main(String[] args) throws LimitException {
+    public static void main(String[] args) throws LimitException {
 
         //Select when you want the alarm to go off.
         int hour = 13;
@@ -28,15 +28,18 @@ public class Alarm {
         //Create alarm object and set alarm time
         AlarmClock alarm = new AlarmClock(hour, minute);
 
-        //Prints out the time of the alarm.
-        System.out.println(alarm.getAlarmTime());
-
         //While the alarm isn't triggered, increase time and print int.
         while(!alarm.isTriggered()) {
-                alarm.clock.timeTick();
-                alarm.clock.getTime();
-                System.out.println(alarm.clock.getTime());
+                alarm.timeTick();
+                alarm.getTime();
+                System.out.println(alarm.getTime());
 
         }
+        alarm.setTime(13,36);
+        System.out.println(alarm.getTime());
+        System.out.println(alarm.isTriggered());
+        alarm.timeTick();
+        System.out.println(alarm.isTriggered());
+
     }
 }
