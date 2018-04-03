@@ -8,9 +8,16 @@ public class AlarmClock extends Clock {
 
     AlarmClock() throws LimitException { }
 
+    AlarmClock(int hour, int minute) throws LimitException {
+        setAlarm(hour, minute);
+    }
+
 
     //Denna metod används för att ställa ett larm.
     public void setAlarm(int hour, int minute) throws LimitException {
+        if (hour > 24 || hour < 0 || minute < 0 || minute > 59) {
+            throw new LimitException("Min is bigger tha max limit!");
+        }
 
         this.status = true;
         this.alarmTime = String.format("%02d:%02d", hour, minute);
@@ -18,11 +25,14 @@ public class AlarmClock extends Clock {
 
 
     //Denna metod används för att avläsa om alarmet ringer (returnerar en bool).
-    public void isTriggered() {
-        String time = clock.getTime();
-        if(time.equals(alarmTime)) {
+    public boolean isTriggered() {
+
+        if(this.clock.getTime().equals(this.alarmTime)) {
             System.out.println("alarm");
+            this.status = false;
+            return true;
         }
+        return false;
     }
 
 
@@ -35,6 +45,11 @@ public class AlarmClock extends Clock {
     //Denna metod används för att stänga av ett larm.
     public void turnOff() {
         this.status = false;
+
+    }
+
+    public String getAlarmTime() {
+        return this.alarmTime;
 
     }
 }
