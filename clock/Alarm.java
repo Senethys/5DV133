@@ -3,12 +3,12 @@ package clock;
 /*
 * Object oriented programming with Java
 * Spring 18
-* Assignment 1
+* Assignment 1  Second revision.
 * File:         Alarm.java (MWE)
 * Description:  Simple program that simulates a clock with alarm functionality.
-* Author:       Svitri Magnusson
+* @author:      Svitri Magnusson
 * CS username:  kv13smn
-* Date:         2018-04-03
+* Date:         2018-04-23
 * Input:        void
 * Output:       console prints
 * Run: javac -cp /usr/share/java/junit4.jar <filenames>
@@ -35,11 +35,15 @@ public class Alarm {
                 System.out.println(alarm.getTime());
 
         }
+
+        System.out.printf("*Rewinding the clock to %02d:%02d*\n", hour, minute-1);
         alarm.setTime(13,36);
         System.out.println(alarm.getTime());
-        System.out.println(alarm.isTriggered());
+        System.out.println("Is the alarm triggered?: " + alarm.isTriggered());
+        System.out.println("*TICK*");
         alarm.timeTick();
-        System.out.println(alarm.isTriggered());
+        alarm.getTime();
+        System.out.println("Is the alarm triggered?: " + alarm.isTriggered());
 
     }
 }
